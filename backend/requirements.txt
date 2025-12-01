@@ -1,0 +1,32 @@
+# Deep Learning / Neural Network Components
+# TensorFlow is the core framework for your InceptionV3 fine-tuning.
+tensorflow
+
+# Standard Python libraries for data manipulation and image handling
+numpy>=1.26.0
+pandas
+Pillow
+
+# Toolkit for splitting data, computing metrics, and preparing labels
+scikit-learn
+
+# Backend API and Production Server
+# Flask is the default framework for your REST API endpoints.
+Flask
+# gunicorn is required to run your Flask application reliably 
+# in the production Linux environment (Vast.ai).
+gunicorn
+# Common library for making API calls (e.g., calling the GenAI API or other services)
+requests
+
+fastapi
+uvicorn
+python-dotenv
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
+langchain-text-splitters
+langgraph
+faiss-cpu
+google-generativeai

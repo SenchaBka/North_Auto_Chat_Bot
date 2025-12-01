@@ -1,0 +1,185 @@
+interface InventorySearchResponse {
+  num_found: number; // Total number of listings matching search criteria
+  listings: Listing[]; // Array of vehicle listings
+  facets?: Facets; // Field facets (when facets parameter is used)
+  stats?: Stats; // Statistical data (when stats parameter is used)
+  range_facets?: RangeFacets; // Range-based facets (when range_facets parameter is used)
+}
+
+interface Listing {
+  id: string; // Unique listing identifier
+  vin: string; // Vehicle Identification Number
+  heading?: string; // Formatted listing title
+  price?: number; // Current listing price
+  miles?: number; // Vehicle mileage
+  msrp?: number; // Manufacturer's Suggested Retail Price (as per dealer website)
+  data_source: string; // Original data source identifier. Mostly `mc` for MarketCheck
+  vdp_url?: string; // Vehicle detail page URL
+  carfax_1_owner?: boolean; // Single owner history flag (If mentioned on dealer website)
+  carfax_clean_title?: boolean; // Clean title status (If mentioned on dealer website)
+  exterior_color?: string; // Exterior color description
+  interior_color?: string; // Interior color description
+  base_int_color?: string; // Standardized interior color
+  base_ext_color?: string; // Standardized exterior color
+  dom: number; // Days on market (lifetime)
+  dom_180: number; // Days on market in last 180 days
+  dom_active: number; // Days on market while active
+  dos_active: number; // Days on site while active
+  seller_type: string; // Type of seller (dealer, fsbo, auction)
+  inventory_type: string; // Inventory classification (new, used)
+  is_certified?: number; // Certified pre-owned flag (1 if certified, only appears when car is certified)
+  stock_no?: string; // Dealer stock number
+  last_seen_at: number; // Last seen timestamp (Unix Seconds), when the listing was last updated
+  last_seen_at_date: string; // Last seen date (ISO format)
+  scraped_at: number; // First seen timestamp (Unix Seconds), when the listing was first scraped
+  scraped_at_date: string; // First seen date (ISO format)
+  first_seen_at: number; // First seen timestamp (Unix Seconds), when the listing was first seen. Copy of `scraped_at` field
+  first_seen_at_date: string; // First seen date (ISO format)
+  first_seen_at_source: number; // First seen at source website timestamp (Unix Seconds)
+  first_seen_at_source_date: string; // First seen at source website date (ISO format)
+  first_seen_at_mc: number; // First seen at MarketCheck timestamp (Unix Seconds)
+  first_seen_at_mc_date: string; // First seen at MarketCheck date (ISO format)
+  ref_price?: number; // Previously listed price at same source for reference
+  price_change_percent?: number; // Price change percentage from reference price
+  ref_price_dt?: number; // Reference price date timestamp (Unix Seconds)
+  ref_miles?: number; // Previously listed mileage at same source for reference
+  ref_miles_dt?: number; // Reference mileage date timestamp (Unix Seconds)
+  source: string; // Data source website domain
+  model_code?: string; // Manufacturer model code
+  in_transit?: boolean; // Vehicle in transit status
+  availability_status?: string; // Current availability status
+  financing_options?: ListingFinance; // Finance information (when available)
+  leasing_options?: ListingLease; // Lease information (when available)
+  media?: Media; // Photos and media content links
+  dealer?: Dealer; // Dealer information
+  mc_dealership?: McDealership; // Enhanced dealer information from MarketCheck's new dealership system
+  build?: Build; // Vehicle specifications
+  dist?: number; // Distance from specified location in miles
+}
+
+interface ListingFinance {
+  loan_term?: number; // Loan term in months
+  loan_apr?: number; // Annual percentage rate
+  down_payment?: number; // Required down payment amount
+  down_payment_percentage?: number; // Down payment as percentage
+  estimated_monthly_payment?: number; // Monthly payment estimate
+}
+
+interface ListingLease {
+  lease_term?: number; // Lease term in months
+  down_payment?: number; // Required down payment amount
+  estimated_monthly_payment?: number; // Monthly lease payment estimate
+}
+
+interface Media {
+  photo_links?: string[]; // Array of photo URLs from dealer website
+  photo_links_cached?: string[]; // Array of cached photo URLs from MarketCheck
+}
+
+interface Dealer {
+  id: number; // Unique dealer identifier
+  website: string; // Dealer website URL
+  name: string; // Dealer business name
+  dealer_type?: string; // Dealer classification (franchise, independent)
+  street?: string; // Street address
+  city?: string; // City name
+  state?: string; // State or province
+  country?: string; // Country code
+  latitude?: string; // Geographic latitude
+  longitude?: string; // Geographic longitude
+  zip?: string; // Postal/ZIP code
+  phone?: string; // Contact phone number
+  seller_email?: string; // Contact email address
+  dealership_group_name?: string; // Parent dealership group
+  msa_code?: string; // Metropolitan Statistical Area code
+}
+
+interface McDealership {
+  mc_website_id?: number; // MarketCheck website identifier
+  mc_dealer_id?: number; // MarketCheck dealer identifier
+  mc_location_id?: number; // MarketCheck location identifier
+  mc_rooftop_id?: number; // MarketCheck rooftop identifier
+  mc_dealership_group_id?: number; // MarketCheck dealership group identifier
+  mc_dealership_group_name?: string; // MarketCheck dealership group name
+  mc_sub_dealership_group_id?: number; // MarketCheck sub-dealership group identifier
+  mc_sub_dealership_group_name?: string; // MarketCheck sub-dealership group name
+  mc_category?: string; // MarketCheck seller category (Dealer, FSBO, Auction, etc.)
+  website?: string; // Dealer website URL
+  name?: string; // Dealer business name
+  dealer_type?: string; // Dealer classification (franchise, independent)
+  street?: string; // Street address
+  city?: string; // City name
+  state?: string; // State or province
+  country?: string; // Country code
+  latitude?: string; // Geographic latitude
+  longitude?: string; // Geographic longitude
+  zip?: string; // Postal/ZIP code
+  msa_code?: string; // Metropolitan Statistical Area code
+  phone?: string; // Contact phone number
+}
+
+interface Build {
+  year: number; // Model year
+  make: string; // Vehicle manufacturer
+  model?: string; // Vehicle model
+  trim?: string; // Trim level
+  version?: string; // Specific version/variant
+  body_type?: string; // Body style (sedan, SUV, truck, etc.)
+  vehicle_type?: string; // Vehicle category
+  transmission?: string; // Transmission type
+  drivetrain?: string; // Drivetrain configuration
+  fuel_type?: string; // Fuel type (gasoline, electric, hybrid, etc.)
+  engine?: string; // Engine description
+  engine_size?: number; // Engine displacement
+  engine_block?: string; // Engine block configuration
+  doors?: number; // Number of doors
+  cylinders?: number; // Number of cylinders
+  made_in?: string; // Manufacturing country
+  overall_height?: string; // Vehicle height
+  overall_length?: string; // Vehicle length
+  overall_width?: string; // Vehicle width
+  std_seating?: string; // Standard seating capacity
+  highway_mpg?: number; // Highway fuel economy
+  city_mpg?: number; // City fuel economy
+  powertrain_type?: string; // Powertrain classification
+}
+
+interface Facets {
+  [key: string]: {
+    item: string; // Facet term/value
+    count: number; // Number of listings for this term
+  }[];
+}
+
+interface Stats {
+  [key: string]: {
+    min: number; // Minimum value
+    max: number; // Maximum value
+    count: number; // Number of values
+    missing: number; // Count of missing values
+    sum: number; // Sum of all values
+    mean: number; // Arithmetic mean
+    stddev: number; // Standard deviation
+    sum_of_squares: number; // Sum of squared values
+    median: number; // Median value
+    percentiles: {
+      [key: string]: number; // Percentile values
+    };
+  };
+}
+
+interface RangeFacets {
+  [key: string]: {
+    counts: {
+      lower_bound: number; // Range lower bound
+      upper_bound: number; // Range upper bound
+      count: number; // Number of listings in range
+    }[];
+    interval: number; // Interval size
+    start: number; // Starting value
+    end: number; // Ending value
+    before?: number; // Count below start
+    between: number; // Count within range
+    after?: number; // Count above end
+  };
+}

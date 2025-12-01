@@ -1,0 +1,465 @@
+REQUEST:
+
+import axios from 'axios';
+
+const options = {
+  method: 'GET',
+  url: 'https://api.marketcheck.com/v2/search/car/active',
+  params: {
+    api_key: 'YOUR_API_KEY',
+    year: '2024',
+    make: 'ford',
+    model: 'f-150',
+    start: '0',
+    rows: '5',
+    facets: 'trim',
+    stats: 'price'
+  },
+  headers: {Accept: 'application/json'}
+};
+
+try {
+  const { data } = await axios.request(options);
+  console.log(data);
+} catch (error) {
+  console.error(error);
+}
+
+PARAMETERS:
+
+api_key
+string required
+
+Your MarketCheck API authentication key. Required for every request, unless OAuth is used.
+append_api_key
+boolean
+
+If true, the response URLs (such as cached images & relevant links) include the api_key query parameter along with value; if false, they do not. Default — true.
+base_ext_color
+string
+
+The base exterior color to filter results by (e.g. White, Black, Blue, Silver, Red). Accepts multiple colors as a comma-separated list.
+base_int_color
+string
+
+The base interior color to filter results by (e.g. Black, Brown, Beige, Red). Accepts multiple colors as a comma-separated list.
+body_subtype
+string
+
+Filters listings by body subtype (e.g., Crew, Extended, Regular, Extended Crew). Accepts multiple values separated by commas.
+body_type
+string
+
+Filters listings by body type (e.g., SUV, Pickup, Sedan, Hatchback, Convertible). Accepts multiple values separated by commas.
+car_type
+string
+
+Filters listings by inventory type. Allowed values - new, used, certified.
+carfax_1_owner
+boolean
+
+If true, returns only vehicles with a single previous owner; if false or omitted, no ownership filter is applied. Default — false.
+carfax_clean_title
+boolean
+
+If true, returns only vehicles with a clean title history; if false or omitted, no title filter is applied. Default — false.
+city
+string
+
+Filters listings by city name (e.g. Los Angeles, San Francisco, Houston).
+city_mpg_range
+string
+
+Filters listings by city fuel-economy mileage. Specify as min-max MPG (e.g., 20-35).
+country
+string
+
+Filters listings by country code. Allowed values - us, ca, all. Default — us.
+cylinders
+string
+
+Filters listings by engine cylinder count (e.g., 4, 6, 8). Accepts multiple values as a comma-separated list.
+dealer_type
+string
+
+Filters dealers by type. Allowed values — franchise, independent.
+dedup
+boolean
+
+If true, returns only is_searchable listings irrespective of dealer_id, mc_website_id, or source. Default — false. See nodedup for the opposite behavior.
+dom_180_range
+string
+
+Filters listings by Days on Market observed over the last 180 days. Specify as min-max days (e.g., 10-50).
+dom_active_range
+string
+
+Filters listings by active Days on Market (DOM). Specify as min-max days.
+dom_range
+string
+
+Filters listings by total Days on Market (DOM). Specify as min-max days.
+doors
+string
+
+Filters listings by number of doors (e.g., 2, 4). Accepts multiple values as comma-separated list.
+dos_active_range
+string
+
+Filters listings by active Days on Site (DOS). Specify as min-max days.
+drivetrain
+string
+
+Filters listings by drivetrain (FWD, RWD, 4WD). Accepts multiple values separated by commas.
+engine
+string
+
+Filters listings by engine designation (e.g., 2.0L I4, 3.5L V6, 2.5L H4). Accepts multiple values as comma-separated list.
+engine_aspiration
+string
+
+Filters listings by engine aspiration (Turbocharged, Naturally Aspirated, etc.). Accepts multiple values separated by commas.
+engine_block
+string
+
+Filters listings by engine block layout (V, I, H). Accepts multiple values separated by commas.
+engine_size
+string
+
+Filters listings by engine displacement size (e.g., 2.0, 2.5, 3.5). Accepts multiple values separated by commas.
+engine_size_range
+string
+
+Filters listings by engine displacement size. Specify as min-max liters (e.g., 1.5-3.0).
+exclude_certified
+boolean
+
+If true, excludes certified-pre-owned vehicles from results. Default — false. See car_type parameter for filtering by inventory type for certified vehicles.
+exclude_dealer_ids
+string
+
+Excludes results from the specified dealer IDs. Accepts multiple values as a comma-separated list.
+exclude_high_value_features
+string
+
+Excludes listings that contain any of the specified High-Value Features (HVFs). Accepts comma-separated HVFs.
+exclude_make
+string
+
+Excludes the specified makes. Accepts multiple values as a comma-separated list.
+exclude_mc_website_ids
+string
+
+Excludes results from the specified MarketCheck website IDs. Accepts multiple values as comma-separated list.
+exclude_options_packages
+string
+
+Excludes listings containing the specified Options Packages (OPs). Accepts multiple values as comma-separated list.
+exclude_sources
+string
+
+Excludes listings from the specified sources (e.g., autonation.com, carmax.com). Accepts multiple values as comma-separated list.
+exterior_color
+string
+
+Filters listings by exterior color (e.g. White, Summit White, Gun Metallic). Accepts multiple values as comma-separated list.
+facet_sort
+string
+
+Sorts facet buckets. Allowed values — count (descending count, default) or index (alphabetical).
+facets
+string
+
+Field name to return bucket facets for. Accepts multiple fields as a comma-separated list.
+finance_down_payment
+string
+
+Filters listings by finance down-payment amount in USD. Specify a single value or a min-max range.
+finance_down_payment_per
+string
+
+Filters listings by finance down-payment percentage. Specify a single value or min-max.
+finance_emp
+string
+
+Filters listings by finance Estimated Monthly Payment (EMP) in USD. Specify a single value or min-max.
+finance_loan_apr
+string
+
+Filters listings by finance loan APR. Specify a single value or min-max.
+finance_loan_term
+string
+
+Filters listings by finance loan term in months. Specify a single value or min-max months.
+first_seen_at_mc_days
+string
+
+Filters listings by the number of days since they were first seen by MarketCheck. Specify as min-max days. Alternative of first_seen_at_mc_range.
+first_seen_at_mc_range
+string
+
+Filters listings by the date they were first seen by MarketCheck. Specify as YYYYMMDD-YYYYMMDD (e.g., 20220523-20220631). Alternative of first_seen_at_mc_days.
+first_seen_at_source_days
+string
+
+Filters listings by the number of days since first seen on the source site. Specify as min-max days. Alternative of first_seen_at_source_range.
+first_seen_at_source_range
+string
+
+Filters listings by date first seen on the source site. Specify as YYYYMMDD-YYYYMMDD. Alternative of first_seen_at_source_days.
+first_seen_days
+string
+
+Filters listings by the number of days since they were first seen in MarketCheck inventory. Specify as min-max days. Alternative of first_seen_range.
+first_seen_range
+string
+
+Filters listings by the first seen date. Specify as YYYYMMDD-YYYYMMDD (e.g., 20220523-20220631). Alternative of first_seen_days.
+fuel_type
+string
+
+Filters listings by fuel type (e.g., Unleaded, Diesel, Electric, Premium Unleaded, Electric / Unleaded). Accepts multiple values separated by commas.
+high_value_features
+string
+
+Filters listings that include all specified High-Value Features (HVFs). Provide HVFs as a comma-separated list.
+highway_mpg_range
+string
+
+Filters listings by highway fuel-economy mileage. Specify as min-max MPG (e.g., 25-40).
+in_transit
+boolean
+
+If true, returns listings marked as in transit; if false or omitted, no in-transit filter is applied.
+include_finance
+boolean
+
+If true, only listings with finance offers are returned. Default — false.
+include_lease
+boolean
+
+If true, only listings with lease offers are returned. Default — false.
+include_non_vin_listings
+boolean
+
+If true, includes listings without a VIN; if false, such listings are excluded. Default — false.
+include_preferred_dealer_flag
+boolean
+
+If true, adds a preferred_dealer flag to listings when they match client-specific filters. Default — false.
+include_relevant_links
+boolean
+
+If true, includes relevant links to other MarketCheck API endpoints in the response. Default — false.
+interior_color
+string
+
+Filters listings by interior color. Accepts multiple values as comma-separated list.
+inventory_count_range
+string
+
+Filters dealers by total listing count. Specify as min-max listings (e.g., 10-100).
+last_seen_days
+string
+
+Filters listings by the number of days since last seen. Specify as min-max days. Alternative of last_seen_at_range.
+last_seen_range
+string
+
+Filters listings by last seen date. Specify as YYYYMMDD-YYYYMMDD (e.g., 20220523-20220631). Alternative of last_seen_at_days.
+latitude
+float
+
+Latitude component of the search location (decimal degrees). Used for geospatial queries along with longitude and radius parameters.
+lease_down_payment
+string
+
+Filters listings by lease down-payment amount in USD. Specify a single value or min-max.
+lease_emp
+string
+
+Filters listings by lease Estimated Monthly Payment (EMP) in USD. Specify a single value or min-max.
+lease_term
+string
+
+Filters listings by lease term length in months. Specify a single value or min-max.
+longitude
+float
+
+Longitude component of the search location (decimal degrees). Used for geospatial queries along with latitude and radius parameters.
+make
+string
+
+Filters listings by vehicle make (e.g., Toyota, Ford, Mercedes-Benz). Accepts multiple values as comma-separated list.
+match
+string
+
+Comma-separated list of field names for exact matching in combination with vins. Allowed values — year, make, model, trim, version, build_code, options_packages. Example: year,make,model or year,make,model,trim,version.
+miles_range
+string
+
+Filters listings by odometer reading. Specify as min-max miles (e.g., 1000-50000).
+min_photo_links
+integer
+
+Filters listings with at least the specified number of photo links (e.g. 3, 8).
+min_photo_links_cached
+integer
+
+Filters listings with at least the specified number of cached photo links (e.g. 3, 8).
+mm
+string
+
+Make-Model composite string from the auto-complete API. Pass the value exactly as returned (e.g., toyota|camry).
+model
+string
+
+Filters listings by specific vehicle model (e.g., Camry). Accepts multiple values separated by commas.
+msa_code
+string
+
+Filters listings by Metropolitan Statistical Area (MSA) code.
+msrp_range
+string
+
+Filters listings by Manufacturer's Suggested Retail Price (MSRP). Specify as min-max USD (e.g., 20000-45000).
+nodedup
+boolean
+
+If true, returns all duplicate listings for a VIN; if false (default), duplicate listings are removed. This is the opposite of dedup.
+options_packages
+string
+
+Filters listings by Options Packages (OPs). Provide a comma-separated list; results include listings containing all specified OPs.
+owned
+boolean
+
+When used with dealer_id, mc_website_id, or source, true returns listings actually owned by that dealer. Default — false.
+photo_links
+boolean
+
+If true, returns only listings that contain at least one photo link. Default — false.
+photo_links_cached
+boolean
+
+If true, returns only listings that contain cached photo links. Default — false.
+plot
+boolean
+
+If true, returns up to 1000 listings for plotting instead of full listing details.
+powertrain_type
+string
+
+Filters listings by powertrain type (e.g., Combustion, BEV, HEV, MHEV, PHEV). Accepts multiple values separated by commas.
+preferred_dealers
+boolean
+
+If true, flags listings in response from preferred dealers based on client scoring. Default — false.
+preferred_dealers_only
+boolean
+
+If true, returns listings only from preferred dealers. Default — false.
+price_change
+string
+
+Filters listings by positive or negative price-change flag (e.g., positive, negative). Accepts multiple comma-separated values.
+price_change_range
+string
+
+Filters listings by the price change in USD. Since price changes can be positive or negative, specify as min|max (e.g., -5000|1000). This is a range filter.
+price_range
+string
+
+Filters listings by advertised price in USD. Specify as min-max (e.g., 1000-50000).
+radius
+integer
+
+Search radius around the specified location in miles. Used with zip or latitude and longitude for geospatial queries.
+range_facets
+string
+
+Comma-separated list of numeric field names for which to return range facets in the response.
+rows
+integer
+
+Number of results to return per request. Default — 10. Maximum — 50.
+seating_capacity
+string
+
+Filters listings by seating capacity (e.g., 2, 5, 7). Accepts multiple values separated by commas.
+sort_by
+string
+
+Field to sort results by. If omitted, defaults to distance when a location filter is used.
+sort_order
+string
+
+Specifies result sort order. Allowed values — asc or desc. Default — asc.
+start
+integer
+
+Pagination offset (0-based). Default — 0. Maximum page is limited to 10,000/rows.
+state
+string
+
+Filters listings by US or Canadian state/province code (e.g., CA, NY, ON). Accepts multiple codes separated by commas.
+stats
+string
+
+Comma-separated list of numeric fields for which to return aggregate statistics (mean, max, min, count).
+stock_no
+string
+
+Filters listings by dealer stock number.
+taxonomy_vins
+string
+
+Comma-separated list of 10-character “squish” VINs (first 8 + 10th & 11th chars). Filters listings by build.
+transmission
+string
+
+Filters listings by transmission type (Automatic, Manual, etc.). Accepts multiple values separated by commas.
+trim
+string
+
+Filters listings by vehicle trim (e.g., EX, Limited). Accepts multiple values separated by commas.
+vdp_url
+string
+
+Filters listings by Vehicle Detail Page (VDP) URL match.
+vehicle_type
+string
+
+Filters listings by vehicle type (Truck, Car). Accepts multiple values separated by commas.
+version
+string
+
+Filters listings by vehicle version name.
+vin
+string
+
+Filters listings by full 17-character Vehicle Identification Number (VIN).
+vins
+string
+
+The VINs to find similar cars around. Accepts a comma-separated list of VINs. Used in conjunction with the match parameter always. Similar parameters are ymmt and taxonomy_vins.
+year
+string
+
+Filters listings by model year (e.g., 2020). Accepts multiple years separated by commas.
+year_range
+string
+
+Filters listings by model year range. Specify as min-max (e.g., 2015-2025).
+ymm
+string
+
+Year-Make-Model composite string from auto-completion (e.g., 2019|Toyota|Camry).
+ymmt
+string
+
+Year-Make-Model-Trim composite string(s). Each combo uses pipe separators and combinations can be comma-separated. For example, 2019|Toyota|Camry|LE,2020|Honda|Civic|EX. Useful for finding multiple groups of similar cars. Alternatively, you can use vins or taxonomy_vins for VIN-based queries.
+zip
+string
+
+Filters listings within the specified 5-digit ZIP code.
