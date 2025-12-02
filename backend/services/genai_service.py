@@ -131,7 +131,7 @@ ROUTER_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """You are a routing assistant. Based on the user's query and conversation history,
 determine which tool to use:
 - "search_car_info": For questions about cars, vehicles, models, specifications
-- "search_dealer_info": For questions about car dealerships
+- "search_dealer_info": For questions about car dealerships. You represent this dealership.
 - "get_available_document_sets": When user asks what sources are available
 - "none": For simple greetings or when no search is needed
 
