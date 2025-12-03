@@ -1,5 +1,5 @@
-# RAG Assignment
-Assignment 4 for Neural Networks class - North Auto part
+# North Auto Chat Bot
+Assignment 4 for Neural Networks class - Chat Bot part for North Auto project
 
 Before running the backend:
 cd backend/services
